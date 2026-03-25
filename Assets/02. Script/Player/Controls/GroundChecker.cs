@@ -19,7 +19,6 @@ namespace _02._Script.Player.Controls
 					_colliders, 
 					Quaternion.identity, 
 					groundLayer);
-				Debug.Log(c);
 				
 				return c > 0;
 			}

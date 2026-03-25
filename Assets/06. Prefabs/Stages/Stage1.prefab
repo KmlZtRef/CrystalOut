@@ -3419,7 +3419,7 @@ MonoBehaviour:
   - {x: 0, y: 0, z: 0}
   - {x: 0, y: 4, z: 0}
   moveSpeed: 2
-  movingTypes: 0
+  movingTypes: 1
 --- !u!1 &7667822673328633582
 GameObject:
   m_ObjectHideFlags: 0

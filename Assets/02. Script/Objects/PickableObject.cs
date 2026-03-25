@@ -20,7 +20,6 @@ namespace _02._Script
 
 		public virtual void Interact(IInteractor interactor)
 		{
-			Debug.Log("Interacting...");
 		}
 
 		public virtual void Pick()

@@ -31,7 +31,6 @@ public class Trigger : MonoBehaviour
         {
             _pressed = _pressing;
             onTrigger?.Invoke(_pressing);
-            Debug.Log($"Pressed = {_pressing}");
         }
     }
 

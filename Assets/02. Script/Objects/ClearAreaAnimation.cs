@@ -24,7 +24,6 @@ namespace _02._Script.Objects
 
         public void ChargeAnimation()
         {
-            Debug.Log("Charge Animation");
             chargeParticle.Play();
         }
 

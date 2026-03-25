@@ -63,7 +63,6 @@ public class OptionContainer : MonoBehaviour
 
     private void SelectOption(string option, bool dontLoadScene)
     {
-        Debug.Log($"Selected: {option}");
         Close();
         if (loadSceneOnClick && !dontLoadScene)
         {
