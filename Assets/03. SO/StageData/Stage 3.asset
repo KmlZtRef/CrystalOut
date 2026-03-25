@@ -15,4 +15,4 @@ MonoBehaviour:
   StageName: "\uB354\uC6B1 \uAC70\uB300\uD55C \uAC83"
   StageDescription: "\uB2F9\uC2E0\uC758 \uD798\uC740 \uC720\uD55C\uD558\uC9C0\uB9CC\n\uC720\uCCB4\uC774\uD0C8\uC758
     \uD798\uC744 \uBE4C\uB9B4 \uC218 \uC788\uC2B5\uB2C8\uB2E4."
-  StagePrefab: {fileID: 0}
+  StagePrefab: {fileID: 9104853996118155705, guid: 0022e5f2ea97bd045bf7e3735e2fb993, type: 3}
