@@ -46,6 +46,7 @@ namespace _02._Script.Player.Controls
 		{
 			outerCam.UnbindEvents(input);
 			UnbindEvents(input);
+			input.OnSwitchPlayerAction -= SwitchControl;
 			
 			gameObject.SetActive(false);
 		}

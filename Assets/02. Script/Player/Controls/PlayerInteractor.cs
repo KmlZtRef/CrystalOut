@@ -14,12 +14,13 @@ namespace _02._Script.Player.Controls
 
 		public void InteractHandle()
 		{
+			if (camOrigin == null) Debug.Log($"NULL {this.name}");
 			Vector3 dir = camOrigin.rotation * Vector3.forward;
 			Debug.DrawRay(camOrigin.position, dir * dist, Color.red, 2f);
-			RaycastHit[] hits = Physics.RaycastAll(camOrigin.position, dir, dist, objectLayer);
-			if (hits.Length > 0)
+			RaycastHit hit;
+			Physics.Raycast(camOrigin.position, dir, out hit, dist, objectLayer);
+			if (hit.transform && hit.transform.TryGetComponent<IInteractable>(out IInteractable obj))
 			{
-				IInteractable obj = hits[0].transform.GetComponent<IInteractable>(); // first Interactable
 				obj?.Interact(this);
 				OnInteractAction?.Invoke(obj);
 			}

@@ -132,7 +132,7 @@ MonoBehaviour:
   camOrigin: {fileID: 7512166865135408213}
   objectLayer:
     serializedVersion: 2
-    m_Bits: 2560
+    m_Bits: 2688
   dist: 4
 --- !u!114 &3564594995515085438
 MonoBehaviour:

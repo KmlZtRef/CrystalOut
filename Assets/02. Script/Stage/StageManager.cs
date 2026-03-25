@@ -14,8 +14,9 @@ namespace _02._Script.Stage
 		private bool _inStage = false;
 		private GameObject _loadedStage;
 
-		public void LoadStage()
+		public void LoadStage(StageDataSo data)
 		{
+			stageData = data;
 			TransitionManager.Instance.OnLoadComplete += GenerateStage;
 			TransitionManager.Instance.ChangeSceneWithTransition("GameScene", "Player");
 		}
@@ -30,7 +31,10 @@ namespace _02._Script.Stage
 		public void UnloadStage()
 		{
 			if (_loadedStage)
+			{
 				Destroy(_loadedStage);
+				_loadedStage = null;
+			}
 		}
 	}
 }
