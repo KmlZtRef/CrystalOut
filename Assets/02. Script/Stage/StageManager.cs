@@ -11,11 +11,13 @@ namespace _02._Script.Stage
 	public class StageManager : UnbreakingSingleton<StageManager>
 	{
 		[SerializeField] private StageDataSo stageData;
-		private bool _inStage = false;
+		private bool _isLoading = false;
 		private GameObject _loadedStage;
 
 		public void LoadStage(StageDataSo data)
 		{
+			if (_isLoading) return;
+			_isLoading = true;
 			stageData = data;
 			TransitionManager.Instance.OnLoadComplete += GenerateStage;
 			TransitionManager.Instance.ChangeSceneWithTransition("GameScene", "Player");
@@ -26,6 +28,8 @@ namespace _02._Script.Stage
 			TransitionManager.Instance.OnLoadComplete -= GenerateStage;
 			if (!stageData) return;
 			_loadedStage = Instantiate(stageData.StagePrefab, Vector3.zero, Quaternion.identity);
+
+			_isLoading = false;
 		}
 
 		public void UnloadStage()

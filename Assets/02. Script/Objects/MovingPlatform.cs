@@ -16,6 +16,7 @@ namespace _02._Script.Objects
         private Rigidbody _rigid;
 
         private bool _moving = false;
+        private bool _moveEnd = false;
         private bool _returning = false;
         private int _currentCheckpoint = 0;
         private int _targetCheckpoint = 1;
@@ -33,6 +34,7 @@ namespace _02._Script.Objects
         protected virtual void FixedUpdate()
         {
             if (!_moving) return;
+            if (_moveEnd) return;
             
             Vector3 dir = (checkpoints[_targetCheckpoint] + _startPos - transform.position).normalized;
             _rigid.position += dir * (moveSpeed * Time.fixedDeltaTime);
@@ -44,6 +46,11 @@ namespace _02._Script.Objects
                     _targetCheckpoint = _currentCheckpoint - 1;
                     if (_currentCheckpoint <= 0)
                     {
+                        if (movingTypes == MovingTypes.Once)
+                        {
+                            _moving = false;
+                            _moveEnd = true;
+                        }
                         _returning = false;
                         _targetCheckpoint = _currentCheckpoint + 1;
                     }
@@ -54,6 +61,11 @@ namespace _02._Script.Objects
                     _targetCheckpoint = _currentCheckpoint + 1;
                     if (_currentCheckpoint >= checkpoints.Length - 1)
                     {
+                        if (movingTypes == MovingTypes.Once)
+                        {
+                            _moving = false;
+                            _moveEnd = true;
+                        }
                         _returning = true;
                         _targetCheckpoint = _currentCheckpoint - 1;
                     }

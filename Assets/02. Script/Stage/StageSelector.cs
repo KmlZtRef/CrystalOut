@@ -1,5 +1,6 @@
 ﻿using System;
 using UnityEngine;
+using UnityUtility.SceneManagements;
 
 namespace _02._Script.Stage
 {
@@ -23,6 +24,11 @@ namespace _02._Script.Stage
 				var container = Instantiate(containerPrf, contents);
 				container.Initialize(data);
 			}
+		}
+
+		public void GoBack()
+		{
+			SceneManager.Instance.LoadOneSceneAsync("MainMenu");
 		}
 
 		// public void Test()
