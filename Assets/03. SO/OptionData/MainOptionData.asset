@@ -13,10 +13,8 @@ MonoBehaviour:
   m_Name: MainOptionData
   m_EditorClassIdentifier: Assembly-CSharp::_02._Script.Options.OptionData
   optionName: Main
+  parentName: 
+  loadSceneOnClick: 0
   datas:
   - Id: Play
     Name: "\uD50C\uB808\uC774"
-  - Id: Settings
-    Name: "\uC124\uC815"
-  - Id: Debug
-    Name: "\uB514\uBC84\uADF8"

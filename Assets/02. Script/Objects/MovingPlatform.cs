@@ -6,7 +6,7 @@ using UnityUtilities;
 
 namespace _02._Script.Objects
 {
-    public class MovingPlatform : MonoBehaviour, IInteractable
+    public class MovingPlatform : MonoBehaviour
     {
         [SerializeField] private Vector3[] checkpoints;
         [SerializeField] private float moveSpeed;
@@ -20,17 +20,17 @@ namespace _02._Script.Objects
         private int _currentCheckpoint = 0;
         private int _targetCheckpoint = 1;
 
-        private void Awake()
+        protected virtual void Awake()
         {
             _startPos = transform.position;
         }
 
-        private void Start()
+        protected virtual void Start()
         {
             _rigid = GetComponent<Rigidbody>();
         }
 
-        private void FixedUpdate()
+        protected virtual void FixedUpdate()
         {
             if (!_moving) return;
             
@@ -61,7 +61,7 @@ namespace _02._Script.Objects
             }
         }
 
-        private void OnDrawGizmosSelected()
+        protected virtual void OnDrawGizmosSelected()
         {
             if (checkpoints == null || checkpoints.Length == 0) return; // No Checkpoints
             Gizmos.color = Color.mediumSpringGreen;
@@ -71,8 +71,8 @@ namespace _02._Script.Objects
                 Gizmos.DrawLine(checkpoints[i] + _startPos, checkpoints[i + 1] + _startPos);
             }
         }
-        
-        public void Interact(IInteractor interactor)
+
+        public void StartMoving()
         {
             _moving = true;
         }
@@ -83,7 +83,7 @@ namespace _02._Script.Objects
         }
 
 #if UNITY_EDITOR
-        private void OnValidate()
+        protected virtual void OnValidate()
         {
             if (!EditorApplication.isPlaying)
             {

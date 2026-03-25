@@ -469,4 +469,4 @@ MonoBehaviour:
   size: {x: 0.75, y: 0.1, z: 0.75}
   groundLayer:
     serializedVersion: 2
-    m_Bits: 640
+    m_Bits: 1664
