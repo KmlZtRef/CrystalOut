@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 42792dcf0b824c76a9aed6a47efd9601, type: 3}
-  m_Name: Stage 4
+  m_Name: Stage 7
   m_EditorClassIdentifier: Assembly-CSharp::_02._Script.Stage.StageDataSo
-  StageName: "\uC811\uADFC \uBD88\uAC00 \uC9C0\uC5ED"
-  StageDescription: "\uAC00\uB054\uC740 \uC0DD\uAC01\uC5C6\uC774 \uAD74\uB7EC\uAC00\uAE30\uB9CC
-    \uD558\uB294 \uB2F9\uC2E0\uC774 \uBD80\uB7FD\uC2B5\uB2C8\uB2E4. \uC778\uAC04\uC758
-    \uC778\uC0DD\uC774\uB780 \uC2E0\uBE44\uD569\uB2C8\uB2E4."
+  StageName: "\uB450\uAC1C\uC758 \uC794\uC0C1"
+  StageDescription: "\uC720\uCCB4\uC774\uD0C8\uC774 \uC560\uCD08\uBD80\uD130 \uBB3C\uB9AC\uBC95\uCE59\uC744
+    \uC9C0\uD0A4\uB294 \uD604\uC0C1\uC740 \uC544\uB2D9\uB2C8\uB2E4. \uC6B0\uB9AC\uB294
+    \uC774 \uAD6C\uC5ED\uC5D0\uC11C \uB098\uAC08 \uC218 \uC5C6\uC2B5\uB2C8\uB2E4."
   StagePrefab: {fileID: 2665892603102748438, guid: 461e4a8683fea82449060075582d3b18, type: 3}

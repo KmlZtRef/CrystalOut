@@ -10,9 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 42792dcf0b824c76a9aed6a47efd9601, type: 3}
-  m_Name: Stage 3
+  m_Name: Stage 5
   m_EditorClassIdentifier: Assembly-CSharp::_02._Script.Stage.StageDataSo
-  StageName: "\uB354\uC6B1 \uAC70\uB300\uD55C \uAC83"
-  StageDescription: "\uB2F9\uC2E0\uC758 \uD798\uC740 \uC720\uD55C\uD558\uC9C0\uB9CC
-    \uC720\uCCB4\uC774\uD0C8\uC758 \uD798\uC744 \uBE4C\uB9B4 \uC218 \uC788\uC2B5\uB2C8\uB2E4."
-  StagePrefab: {fileID: 9104853996118155705, guid: 0022e5f2ea97bd045bf7e3735e2fb993, type: 3}
+  StageName: "\uAD11\uAE30\uC758 \uBE5B"
+  StageDescription: "\uC774\uB7F0 \uACF3\uC5D0\uC11C\uB3C4 \uB2F9\uC2E0\uC740 \uC0B4\uC544\uB0A8\uC744
+    \uC218 \uC788\uC744\uAE4C\uC694? \uC544, \uBB3C\uB860 \uC8FD\uC744 \uC218 \uC788\uB2E4\uB294
+    \uAC83\uC740 \uC544\uB2D9\uB2C8\uB2E4."
+  StagePrefab: {fileID: 2665892603102748438, guid: 461e4a8683fea82449060075582d3b18, type: 3}
