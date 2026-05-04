@@ -153,4 +153,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7ffd964544c54683abacc87f40c75778, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::_02._Script.PickableObject
-  normalPushRange: 0.5
+  castingSize: {x: 0.5, y: 0.5, z: 0.5}

@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using UnityEngine;
 
 public class RazorShooter : MonoBehaviour
@@ -6,15 +7,18 @@ public class RazorShooter : MonoBehaviour
     [SerializeField] private Transform razorOffset;
     [SerializeField] private LayerMask layer;
     [SerializeField] private float maxDistance;
+    [SerializeField] private float maxLineWidth;
     private LineRenderer _line;
     
 
     private void Start()
     {
         _line = GetComponentInChildren<LineRenderer>();
+        _line.widthCurve = new AnimationCurve(new Keyframe(0, 0));
     }
-
-    void Update()
+    
+    [ContextMenu("Shoot")]
+    public void Shoot()
     {
         Vector3 dir = transform.rotation * Vector3.forward;
         bool isHit = Physics.Raycast(razorOffset.position, dir, out RaycastHit hit, maxDistance, layer);
@@ -30,5 +34,11 @@ public class RazorShooter : MonoBehaviour
         
         _line.SetPosition(0, Vector3.zero);
         _line.SetPosition(1, targetPoint);
+        _line.widthCurve.MoveKey(0, new Keyframe(0, 1));
     }
+
+    // private IEnumerator LerpWidthCoroutine()
+    // {
+    //     
+    // }
 }

@@ -1,3 +1,4 @@
+using System;
 using _02._Script.Stage;
 using UnityEngine;
 using UnityEngine.UI;
@@ -10,6 +11,8 @@ public class StageInfoContainer : MonoBehaviour
 	[SerializeField] private Text descriptionTmp;
 	[SerializeField] private Button selectButton;
 
+	public event Action<StageDataSo> OnButtonClick; 
+
 	public void Initialize(StageDataSo stageData)
 	{
 		this.stageData = stageData;
@@ -20,6 +23,9 @@ public class StageInfoContainer : MonoBehaviour
 
 	private void HandleButtonClick()
 	{
-		StageManager.Instance.LoadStage(stageData);
+		OnButtonClick?.Invoke(stageData);
+		
+		// Legacy:
+		// StageManager.Instance.LoadStage(stageData);
 	}
 }

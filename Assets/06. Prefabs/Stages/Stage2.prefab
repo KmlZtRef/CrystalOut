@@ -163,6 +163,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::StageObjectController
   clearAreaLocation: {fileID: 6367249993360024074}
   clearAreaPrefab: {fileID: 5860005503021681449, guid: 215cc5785edd1e6468440141a2076bb0, type: 3}
+  clearArea: {fileID: 0}
 --- !u!1 &565637397955645521
 GameObject:
   m_ObjectHideFlags: 0
@@ -2417,7 +2418,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7ffd964544c54683abacc87f40c75778, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::_02._Script.PickableObject
-  normalPushRange: 0.5
+  castingSize: {x: 0.5, y: 0.5, z: 0.5}
 --- !u!1 &2802351932918815003
 GameObject:
   m_ObjectHideFlags: 0

@@ -5,17 +5,27 @@ namespace _02._Script.Player.Controls
 {
 	public class ObjectCatchHandler : MonoBehaviour, ICatchHandler
 	{
-		[SerializeField] private Transform handOrigin;
+		[SerializeField] private Transform camOrigin;
+		[SerializeField] private LayerMask objectLayer;
+		[SerializeField] private LayerMask groundLayer;
+		[SerializeField] private float distance;
+		[SerializeField] private float maxPickableMass;
 		private PickableObject _picked;
+        
 		public void OnInteract(IInteractable interactable)
 		{
-			if (interactable != null)
+			switch (interactable)
 			{
-				if (interactable is PickableObject pickable)
+				case PickableObject pickable:
 				{
-					_picked?.Drop();
-					_picked = pickable;
-					_picked.Pick();
+					if (pickable.Mass <= maxPickableMass)
+					{
+						_picked?.Drop();
+						_picked = pickable;
+						_picked.Pick();
+					}
+
+					break;
 				}
 			}
 		}
@@ -28,8 +38,21 @@ namespace _02._Script.Player.Controls
 
 		private void Update()
 		{
-			if (_picked)
-				_picked.transform.position = handOrigin.position;
+			if (!_picked) return;
+			
+			Vector3 dir = camOrigin.rotation * Vector3.forward;
+			float dist;
+			if (Physics.BoxCast(camOrigin.position, _picked.CastingSize, dir, out RaycastHit hit, _picked.transform.rotation, distance, groundLayer))
+			{
+				dist = hit.distance;
+			}
+			else
+			{
+				dist = distance;
+			}
+			Vector3 pos = camOrigin.position + dist * dir;
+
+			_picked.transform.position = pos;
 		}
 	}
 }

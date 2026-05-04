@@ -277,6 +277,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 3968
   maxDistance: 20
+  maxLineWidth: 1
 --- !u!1 &7300679530998384653
 GameObject:
   m_ObjectHideFlags: 0

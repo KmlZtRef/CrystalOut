@@ -6735,6 +6735,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::StageObjectController
   clearAreaLocation: {fileID: 1879986306168271056}
   clearAreaPrefab: {fileID: 5860005503021681449, guid: 215cc5785edd1e6468440141a2076bb0, type: 3}
+  clearArea: {fileID: 0}
 --- !u!1001 &2463651177492120604
 PrefabInstance:
   m_ObjectHideFlags: 0

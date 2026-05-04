@@ -44,7 +44,7 @@ GameObject:
   - component: {fileID: 5584512920333821731}
   - component: {fileID: 4483529287965643590}
   - component: {fileID: 4137416501443468498}
-  - component: {fileID: 7147929786874718662}
+  - component: {fileID: 3924737555926524018}
   - component: {fileID: 8313897732959527234}
   - component: {fileID: 1791755750978557272}
   m_Layer: 8
@@ -128,7 +128,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 512
   dist: 20
---- !u!114 &7147929786874718662
+--- !u!114 &3924737555926524018
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -137,9 +137,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 5455477996853764867}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 54b5ca29069d496ba2f96b6907d679b9, type: 3}
+  m_Script: {fileID: 11500000, guid: 10ccc6377210450f8031b43ec0ac1148, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::_02._Script.Player.Controls.CamCatchHandler
+  m_EditorClassIdentifier: Assembly-CSharp::_02._Script.Player.Controls.ObjectCatchHandler
   camOrigin: {fileID: 8776344666016309581}
   objectLayer:
     serializedVersion: 2
@@ -148,6 +148,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 640
   distance: 20
+  maxPickableMass: 1000
 --- !u!54 &8313897732959527234
 Rigidbody:
   m_ObjectHideFlags: 0

@@ -1,14 +1,23 @@
 using System;
+using _02._Script.Objects;
 using UnityEngine;
 
 public class StageObjectController : MonoBehaviour
 {
     [SerializeField] private Transform clearAreaLocation;
     [SerializeField] private GameObject clearAreaPrefab;
+    [SerializeField] private ClearInteraction clearArea;
+    
+    public ClearInteraction ClearArea => clearArea;
 
-    private void Start()
+    public void Init()
     {
-        Instantiate(clearAreaPrefab,clearAreaLocation.position, clearAreaLocation.rotation, clearAreaLocation);
+        clearArea = Instantiate(
+                    clearAreaPrefab,
+                    clearAreaLocation.position, 
+                    clearAreaLocation.rotation, 
+                    clearAreaLocation)
+                .GetComponent<ClearInteraction>();
     }
 
     private void OnDrawGizmosSelected()

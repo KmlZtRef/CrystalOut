@@ -10,10 +10,18 @@ namespace _02._Script.Objects
 	{
 		[SerializeField] private ClearAreaAnimation anim;
 		[SerializeField] private CinemachineCamera clearCam;
+		
+		public event Action OnInteracted;
+		public event Action OnAnimEnd;
 
 		private void Awake()
 		{
 			anim ??= GetComponent<ClearAreaAnimation>();
+		}
+
+		private void Start()
+		{
+			anim.OnAnimationEnd += OnAnimationEnd;
 		}
 
 		public void Interact(IInteractor interactor)
@@ -22,7 +30,10 @@ namespace _02._Script.Objects
 			{
 				clearable.ClearLevel();
 				ClearStage();
-				GameManager.Instance.StageClear();
+				
+				OnInteracted?.Invoke();
+				// Legacy:
+				// GameManager.Instance.StageClear();
 			}
 		}
 
@@ -30,6 +41,11 @@ namespace _02._Script.Objects
 		{
 			anim.ActivateAnimation();
 			clearCam.Priority = 5;
+		}
+
+		private void OnAnimationEnd()
+		{
+			OnAnimEnd?.Invoke();
 		}
 	}
 }

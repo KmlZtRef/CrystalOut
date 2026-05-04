@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 namespace _02._Script.Objects
@@ -9,6 +10,8 @@ namespace _02._Script.Objects
         [SerializeField] private Animator animator;
 
         private int _animActiveHash;
+        
+        public event Action OnAnimationEnd;
 
         private void Awake()
         {
@@ -27,8 +30,9 @@ namespace _02._Script.Objects
             chargeParticle.Play();
         }
 
-        public void PlayParticle()
+        public void AnimationEnded()
         {
+            OnAnimationEnd?.Invoke();
             chargeParticle.Stop();
             particle.Play();
         }

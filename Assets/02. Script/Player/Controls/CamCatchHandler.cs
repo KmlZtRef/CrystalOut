@@ -38,7 +38,7 @@ namespace _02._Script.Player.Controls
 				Vector3 pos;
 				if (Physics.Raycast(camOrigin.position, dir, out RaycastHit hit, distance, groundLayer))
 				{
-					pos = hit.point + hit.normal * _picked.NormalPush;
+					pos = hit.point;
 				}
 				else
 				{

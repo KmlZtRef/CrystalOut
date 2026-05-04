@@ -1,4 +1,6 @@
 ﻿using System;
+using _02._Script.Logics.MessageParameters;
+using GameManagements;
 using UnityEngine;
 using UnityUtility.SceneManagements;
 
@@ -14,7 +16,7 @@ namespace _02._Script.Stage
 
 		private void Start()
 		{
-			RenderContents();	
+			RenderContents();
 		}
 
 		private void RenderContents()
@@ -23,6 +25,7 @@ namespace _02._Script.Stage
 			{
 				var container = Instantiate(containerPrf, contents);
 				container.Initialize(data);
+				container.OnButtonClick += HandleOnButtonClick;
 			}
 		}
 
@@ -31,9 +34,9 @@ namespace _02._Script.Stage
 			SceneManager.Instance.LoadOneSceneAsync("MainMenu");
 		}
 
-		// public void Test()
-		// {
-		// 	StageManager.Instance.LoadStage();
-		// }
+		public void HandleOnButtonClick(StageDataSo data)
+		{
+			MessageBus.Publish(new OnStageSelect(){StageData = data});
+		}
 	}
 }

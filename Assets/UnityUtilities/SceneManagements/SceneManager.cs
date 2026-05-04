@@ -65,6 +65,11 @@ namespace UnityUtility.SceneManagements
             await UnitySceneManager.LoadSceneAsync(sceneName, LoadSceneMode.Additive);
         }
 
+        public async Task UnloadSceneAsync(string sceneName)
+        {
+            await UnitySceneManager.UnloadSceneAsync(sceneName);
+        }
+
         private void OnSceneChangedHandle(Scene scene, LoadSceneMode mode)
         {
             

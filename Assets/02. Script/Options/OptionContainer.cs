@@ -3,8 +3,8 @@ using _02._Script.Options;
 using DG.Tweening;
 using UnityEngine;
 using UnityEngine.UI;
-using Text = TMPro.TextMeshProUGUI;
 using SceneManager = UnityUtility.SceneManagements.SceneManager;
+using Text = TMPro.TextMeshProUGUI;
 
 public class OptionContainer : MonoBehaviour
 {

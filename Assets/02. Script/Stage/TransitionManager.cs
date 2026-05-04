@@ -1,46 +1,63 @@
 using System;
 using System.Collections;
+using _02._Script.Logics.MessageParameters;
+using GameManagements;
 using UnityEngine;
-using UnityUtilities;
 using UnityUtility.SceneManagements;
 
-public class TransitionManager : UnbreakingSingleton<TransitionManager>
+namespace _02._Script.Stage
 {
-    [SerializeField] private LoadingUI loadingUI;
-    
-    public event Action OnLoadComplete;
-
-    public void ChangeSceneWithTransition(string sceneName, params string[] additiveScenes)
+    public class TransitionManager : Manager
     {
-        if (loadingUI == null) return;
+        private LoadingUI _loadingUIPrefab;
+        private LoadingUI _loadingUI;
 
-        if (loadingUI.IsLoading)
+        public void ChangeSceneWithTransition(string sceneName, params string[] additiveScenes)
         {
-            Debug.Log("Already loading!");
-            return;
-        }
-        
-        StartCoroutine(TransitionCoroutine(sceneName, additiveScenes));
-    }
+            if (_loadingUI == null) return;
 
-    private IEnumerator TransitionCoroutine(string sceneName, string[] additiveScenes)
-    {
-        loadingUI.Open();
-        yield return new WaitUntil(() => !loadingUI.IsLoading);
-        SceneManager.Instance.LoadOneSceneAsync(sceneName);
-        yield return new WaitUntil(() => !SceneManager.Instance.IsLoading);
-        
-        if (additiveScenes is { Length: > 0 }) // Load Additive Scenes
-        {
-            for (int i = 0; i < additiveScenes.Length; i++)
+            if (_loadingUI.IsLoading)
             {
-                SceneManager.Instance.AddSceneAsync(additiveScenes[i]);
-                yield return new WaitUntil(() => !SceneManager.Instance.IsLoading);
+                Debug.Log("Already loading!");
+                return;
             }
+        
+            StartCoroutine(TransitionCoroutine(sceneName, additiveScenes));
         }
+
+        private IEnumerator TransitionCoroutine(string sceneName, string[] additiveScenes)
+        {
+            _loadingUI.Open();
+            yield return new WaitUntil(() => !_loadingUI.IsLoading); // 로딩 UI 완전히 열릴때까지 기다림
+            SceneManager.Instance.LoadOneSceneAsync(sceneName);
+            yield return new WaitUntil(() => !SceneManager.Instance.IsLoading); // 씬 로드 끝날때까지 기다림
         
-        OnLoadComplete?.Invoke();
+            if (additiveScenes is { Length: > 0 }) // Load Additive Scenes
+            {
+                for (int i = 0; i < additiveScenes.Length; i++)
+                {
+                    SceneManager.Instance.AddSceneAsync(additiveScenes[i]);
+                    yield return new WaitUntil(() => !SceneManager.Instance.IsLoading);
+                }
+            }
         
-        loadingUI.Close();
+            MessageBus.Publish(new OnTransitionEnded());
+        
+            _loadingUI.Close();
+        }
+
+        public override void Initialize(InitContext data)
+        {
+            MessageBus.Subscribe<OnStartLoadScene>(HandleStartLoadStage);
+            // 로딩 UI 생성
+            _loadingUIPrefab = data.LoadingUIPrefab;
+            _loadingUI = Instantiate(_loadingUIPrefab);
+            DontDestroyOnLoad(_loadingUI.gameObject);
+        }
+
+        private void HandleStartLoadStage(OnStartLoadScene param)
+        {
+            ChangeSceneWithTransition(param.SceneName);
+        }
     }
 }

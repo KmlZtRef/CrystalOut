@@ -1014,7 +1014,7 @@ AnimationClip:
     intParameter: 0
     messageOptions: 0
   - time: 3
-    functionName: PlayParticle
+    functionName: AnimationEnded
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0

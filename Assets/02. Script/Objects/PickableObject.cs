@@ -6,11 +6,12 @@ namespace _02._Script
 {
 	public class PickableObject : MonoBehaviour, IInteractable
 	{
-		[SerializeField] private float normalPushRange;
+		[SerializeField] private Vector3 castingSize;
 		protected Rigidbody Rigid;
 		protected Collider Collider;
 		
-		public float NormalPush => normalPushRange;
+		public Vector3 CastingSize => castingSize;
+		public float Mass => Rigid.mass;
 
 		private void Start()
 		{
@@ -40,15 +41,10 @@ namespace _02._Script
 			Rigid.angularVelocity = Vector3.zero;
 		}
 
-		public virtual void Fix()
-		{
-			
-		}
-
 		private void OnDrawGizmosSelected()
 		{
 			Gizmos.color = Color.lawnGreen;
-			Gizmos.DrawWireSphere(transform.position, normalPushRange);
+			Gizmos.DrawWireCube(transform.position, castingSize * 2);
 		}
 	}
 }
