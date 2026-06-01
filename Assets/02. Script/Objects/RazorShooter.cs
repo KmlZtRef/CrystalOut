@@ -1,25 +1,34 @@
 using System;
 using System.Collections;
+using _02._Script.Player.Controls;
 using UnityEngine;
 
-public class RazorShooter : MonoBehaviour
+public class RazorShooter : MonoBehaviour, IInteractable
 {
     [SerializeField] private Transform razorOffset;
     [SerializeField] private LayerMask layer;
     [SerializeField] private float maxDistance;
     [SerializeField] private float maxLineWidth;
+    [SerializeField] private float lerpSpeed = 5;
+    [SerializeField] private float ignoreWidth;
     private LineRenderer _line;
+    
+    private Coroutine _lerpWidthCoroutine = null;
     
 
     private void Start()
     {
         _line = GetComponentInChildren<LineRenderer>();
-        _line.widthCurve = new AnimationCurve(new Keyframe(0, 0));
+        _line.widthCurve = new AnimationCurve(new Keyframe(0, maxLineWidth));
+        _line.widthMultiplier = 0;
     }
     
     [ContextMenu("Shoot")]
     public void Shoot()
     {
+        if (_lerpWidthCoroutine != null)
+            StopCoroutine(_lerpWidthCoroutine);
+        
         Vector3 dir = transform.rotation * Vector3.forward;
         bool isHit = Physics.Raycast(razorOffset.position, dir, out RaycastHit hit, maxDistance, layer);
         Vector3 targetPoint;
@@ -34,11 +43,32 @@ public class RazorShooter : MonoBehaviour
         
         _line.SetPosition(0, Vector3.zero);
         _line.SetPosition(1, targetPoint);
-        _line.widthCurve.MoveKey(0, new Keyframe(0, 1));
+        _line.widthMultiplier = 1;
+        
+        _lerpWidthCoroutine = StartCoroutine(LerpWidthCoroutine());
     }
 
-    // private IEnumerator LerpWidthCoroutine()
-    // {
-    //     
-    // }
+    private IEnumerator LerpWidthCoroutine()
+    {
+        while (true)
+        {
+            float cur = _line.widthMultiplier;
+            float t = Mathf.Clamp01(Time.deltaTime * lerpSpeed);
+            float width = Mathf.Lerp(cur, 0f, t);
+            _line.widthMultiplier = width;
+            if (width <= ignoreWidth)
+            {
+                break;
+            }
+            
+            yield return null;
+        }
+        
+        _line.widthMultiplier = 0f;
+    }
+
+    public void Interact(IInteractor interactor)
+    {
+        Shoot();
+    }
 }

@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
 
 namespace _02._Script.Player.Controls
 {
@@ -6,6 +7,7 @@ namespace _02._Script.Player.Controls
 	{
 		[SerializeField] private float speed = 15;
 		[SerializeField] private float jumpPower = 5;
+		[SerializeField] private float gravityIncreaseAmount = 4f;
 		[SerializeField] private Transform referenceTransform;
 		private GroundChecker _groundChecker;
 		private Rigidbody _rigid;
@@ -32,7 +34,9 @@ namespace _02._Script.Player.Controls
 		public void JumpHandle()
 		{
 			if (_groundChecker.IsGround)
-				_rigid.AddForce(0, jumpPower, 0, ForceMode.Impulse);
+			{
+				_rigid.linearVelocity = new Vector3(_rigid.linearVelocity.x, jumpPower, _rigid.linearVelocity.z);
+			}
 		}
 
 		public void StopMovement()
@@ -45,6 +49,11 @@ namespace _02._Script.Player.Controls
 			Vector3 lookingDir = referenceTransform.rotation * _velocity;
 			Vector2 dir = new Vector2(lookingDir.x, lookingDir.z).normalized;
 			float yVelocity = _rigid.linearVelocity.y;
+
+			if (yVelocity < 0)
+			{
+				_rigid.AddForce(Vector3.down * gravityIncreaseAmount, ForceMode.Acceleration);
+			}
 			
 			_rigid.linearVelocity = new  Vector3(dir.x * speed, yVelocity, dir.y * speed);
 		}
