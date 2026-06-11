@@ -7,7 +7,7 @@ namespace UnityUtilities
 		private static T _instance = null;
 		private static bool _isDestroyed = false;
         
-		private void Awake()
+		protected virtual void Awake()
 		{
 			if (_instance == null)
 			{

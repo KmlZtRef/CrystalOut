@@ -7,7 +7,7 @@ namespace _02._Script.Effects
 	public class ParticleEffect : PlayableEffect
 	{
 		public ParticleSystem Particle { get; private set; }
-		private void Start()
+		protected virtual void Start()
 		{
 			Particle = GetComponent<ParticleSystem>();
 		}

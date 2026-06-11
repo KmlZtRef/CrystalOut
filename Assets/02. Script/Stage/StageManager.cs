@@ -1,13 +1,15 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using _02._Script.Logics.MessageParameters;
 using GameManagements;
 using UnityEngine;
+using UnityUtility.SceneManagements;
 
 namespace _02._Script.Stage
 {
 	public class StageManager : Manager
 	{
-		private string _gameSceneName = "GameScene";
+		private string _gameSceneName;
 		private string _mainMenuSceneName;
 		[SerializeField] private StageDataSo stageData;
 		private bool _isLoading = false;
@@ -20,9 +22,6 @@ namespace _02._Script.Stage
 			stageData = data;
 			MessageBus.Subscribe<OnTransitionEnded>(GenerateStage);
 			MessageBus.Publish(new OnStartLoadScene() {SceneName = _gameSceneName});
-			
-			// Legacy:
-			// TransitionManager.Instance.ChangeSceneWithTransition("GameScene", "Player");
 		}
 
 		private void HandleClearInteracted()
@@ -37,22 +36,33 @@ namespace _02._Script.Stage
 			UnloadStage();
 		}
 
-		private void GenerateStage(OnTransitionEnded _) // 스테이지를 씬에 생성
+		private async void GenerateStage(OnTransitionEnded _) // 스테이지를 씬에 생성
 		{
-			MessageBus.Unsubscribe<OnTransitionEnded>(GenerateStage);
-			
-			// Legacy:
-			// TransitionManager.Instance.OnLoadComplete -= GenerateStage;
-			
-			if (!stageData) return;
-			_loadedStage = Instantiate(stageData.StagePrefab, Vector3.zero, Quaternion.identity).GetComponent<StageObjectController>();
-			_loadedStage.Init();
-			_loadedStage.ClearArea.OnInteracted += HandleClearInteracted;
-			_loadedStage.ClearArea.OnAnimEnd += HandleClearAnimEnd;
-			
-			CursorControl.Instance.HideCursor();
-			
-			_isLoading = false;
+			try
+			{
+				MessageBus.Unsubscribe<OnTransitionEnded>(GenerateStage);
+
+				if (!stageData) return;
+				// Legacy : Prefab loading style
+				// _loadedStage = Instantiate(stageData.StagePrefab, Vector3.zero, Quaternion.identity).GetComponent<StageObjectController>();
+
+				// New : Scene loading style
+				await SceneManager.Instance.AddSceneAsync(stageData.StageSceneName);
+				_loadedStage = FindFirstObjectByType<StageObjectController>();
+				_loadedStage.Init();
+				_loadedStage.ClearArea.OnInteracted += HandleClearInteracted;
+				_loadedStage.ClearArea.OnAnimEnd += HandleClearAnimEnd;
+
+				CursorControl.Instance.HideCursor();
+			}
+			catch (Exception e)
+			{
+				Debug.LogError("[StageManager] " + e.Message);
+			}
+			finally
+			{
+				_isLoading = false;
+			}
 		}
 
 		private void HandleClearAnimEnd()

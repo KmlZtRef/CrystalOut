@@ -6,10 +6,13 @@ namespace _02._Script
 {
 	public class PickableObject : MonoBehaviour, IInteractable
 	{
+		[SerializeField] private float castingRadius;
 		[SerializeField] private Vector3 castingSize;
 		protected Rigidbody Rigid;
 		protected Collider Collider;
+		protected MeshRenderer[] Renderers;
 		
+		public float CastingRadius => castingRadius;
 		public Vector3 CastingSize => castingSize;
 		public float Mass => Rigid.mass;
 
@@ -17,6 +20,7 @@ namespace _02._Script
 		{
 			Rigid = GetComponent<Rigidbody>();
 			Collider = GetComponent<Collider>();
+			Renderers = GetComponentsInChildren<MeshRenderer>();
 		}
 
 		public virtual void Interact(IInteractor interactor)
@@ -41,10 +45,18 @@ namespace _02._Script
 			Rigid.angularVelocity = Vector3.zero;
 		}
 
+		public virtual void SetVisible(bool visible)
+		{
+			foreach (var r in Renderers)
+			{
+				r.enabled = visible;
+			}
+		}
+
 		private void OnDrawGizmosSelected()
 		{
-			Gizmos.color = Color.lawnGreen;
-			Gizmos.DrawWireCube(transform.position, castingSize * 2);
+			// Gizmos.color = Color.lawnGreen;
+			// Gizmos.DrawWireCube(transform.position, castingRadius * 2);
 		}
 	}
 }

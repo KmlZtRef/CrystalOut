@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aba56fe6e17e4045abc8791b4f43f084, type: 3}
   m_Name: MainInitContext
   m_EditorClassIdentifier: Assembly-CSharp::GameManagements.InitContext
-  <PlayerSceneName>k__BackingField: Player
   <LoadingUIPrefab>k__BackingField: {fileID: 6430264393782421576, guid: 65ec01b33cd7f194d967e2f96d1548f6, type: 3}
-  <GameSceneName>k__BackingField: GameScene
+  <PlayerSceneName>k__BackingField: Player
+  <GameSceneName>k__BackingField: IngameEnvironments
   <MainMenuSceneName>k__BackingField: MainMenu

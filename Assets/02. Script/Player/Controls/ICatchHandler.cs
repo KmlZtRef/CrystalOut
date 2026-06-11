@@ -4,5 +4,6 @@
 	{
 		public void OnInteract(IInteractable interactable);
 		public void OnDrop();
+		public void OnRotate(float amount);
 	}
 }

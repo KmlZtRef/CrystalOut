@@ -1,4 +1,6 @@
 ﻿using System;
+using _02._Script.EventParams;
+using GameManagements;
 using UnityEngine;
 
 namespace _02._Script.Player.Controls
@@ -21,7 +23,7 @@ namespace _02._Script.Player.Controls
 			}
 		}
 
-		private void SwitchControl()
+		private void SwitchControl() // 나중에 FSM으로 변경 예정
 		{
 			if (_outerFluid)
 			{
@@ -41,6 +43,8 @@ namespace _02._Script.Player.Controls
 				
 				_outerFluid = true;
 			}
+			
+			MessageBus.Publish(new OnPlayerStateChanged() {PlayerState = _outerFluid});
 		}
 
 		public void DisableControl()

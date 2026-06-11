@@ -1,9 +1,10 @@
 using System;
 using System.Collections;
+using _02._Script.Objects;
 using _02._Script.Player.Controls;
 using UnityEngine;
 
-public class RazorShooter : MonoBehaviour, IInteractable
+public class RazorShooter : TriggerableMono, IInteractable
 {
     [SerializeField] private Transform razorOffset;
     [SerializeField] private LayerMask layer;
@@ -11,6 +12,7 @@ public class RazorShooter : MonoBehaviour, IInteractable
     [SerializeField] private float maxLineWidth;
     [SerializeField] private float lerpSpeed = 5;
     [SerializeField] private float ignoreWidth;
+    [SerializeField] private float triggerDelay = 0.1f;
     private LineRenderer _line;
     
     private Coroutine _lerpWidthCoroutine = null;
@@ -35,6 +37,11 @@ public class RazorShooter : MonoBehaviour, IInteractable
         if (isHit)
         {
             targetPoint = razorOffset.InverseTransformPoint(hit.point);
+
+            if (hit.collider.gameObject.TryGetComponent(out ITriggerable triggerable))
+            {
+                StartCoroutine(TriggerCoroutine(triggerable));
+            }
         }
         else
         {
@@ -67,7 +74,18 @@ public class RazorShooter : MonoBehaviour, IInteractable
         _line.widthMultiplier = 0f;
     }
 
+    private IEnumerator TriggerCoroutine(ITriggerable triggerable)
+    {
+        yield return new WaitForSeconds(triggerDelay);
+        triggerable.Trigger();
+    }
+
     public void Interact(IInteractor interactor)
+    {
+        Shoot();
+    }
+
+    public override void Trigger()
     {
         Shoot();
     }

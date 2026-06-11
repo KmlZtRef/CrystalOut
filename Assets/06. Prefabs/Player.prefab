@@ -101,6 +101,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::_02._Script.PlayerMovement
   speed: 5
+  acceleration: 10
   jumpPower: 5
   gravityIncreaseAmount: 11
   referenceTransform: {fileID: 7512166865135408213}
@@ -133,7 +134,7 @@ MonoBehaviour:
   camOrigin: {fileID: 7512166865135408213}
   objectLayer:
     serializedVersion: 2
-    m_Bits: 2688
+    m_Bits: 6784
   dist: 4
 --- !u!114 &3564594995515085438
 MonoBehaviour:
@@ -151,11 +152,15 @@ MonoBehaviour:
   objectLayer:
     serializedVersion: 2
     m_Bits: 512
+  wallLayer:
+    serializedVersion: 2
+    m_Bits: 0
   groundLayer:
     serializedVersion: 2
-    m_Bits: 640
+    m_Bits: 8064
   distance: 3
   maxPickableMass: 10
+  rotationAmount: 5
 --- !u!54 &4358126348782421249
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -217,6 +222,7 @@ GameObject:
   - component: {fileID: 4347261704969110862}
   - component: {fileID: 1455083387795214123}
   - component: {fileID: 6362648557566650581}
+  - component: {fileID: 11309835277536543}
   m_Layer: 8
   m_Name: PlayerParticle
   m_TagString: Untagged
@@ -5042,6 +5048,18 @@ ParticleSystemRenderer:
   m_MeshWeighting1: 1
   m_MeshWeighting2: 1
   m_MeshWeighting3: 1
+--- !u!114 &11309835277536543
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1624817697173964161}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9516911cdc344e0d947ac3a64b3d2421, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::_02._Script.Effects.PlayerBodyParticle
 --- !u!1 &2076156339266668655
 GameObject:
   m_ObjectHideFlags: 0

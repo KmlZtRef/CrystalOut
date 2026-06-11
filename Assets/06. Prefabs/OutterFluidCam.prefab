@@ -126,7 +126,7 @@ MonoBehaviour:
   camOrigin: {fileID: 8776344666016309581}
   objectLayer:
     serializedVersion: 2
-    m_Bits: 512
+    m_Bits: 6784
   dist: 20
 --- !u!114 &3924737555926524018
 MonoBehaviour:
@@ -144,11 +144,15 @@ MonoBehaviour:
   objectLayer:
     serializedVersion: 2
     m_Bits: 512
+  wallLayer:
+    serializedVersion: 2
+    m_Bits: 0
   groundLayer:
     serializedVersion: 2
-    m_Bits: 640
+    m_Bits: 8064
   distance: 20
   maxPickableMass: 1000
+  rotationAmount: 5
 --- !u!54 &8313897732959527234
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -210,7 +214,7 @@ GameObject:
   - component: {fileID: 7924690128956394970}
   - component: {fileID: 6818070272788309556}
   m_Layer: 8
-  m_Name: FollowCam
+  m_Name: OutterFollowCam
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

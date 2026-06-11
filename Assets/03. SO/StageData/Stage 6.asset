@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 42792dcf0b824c76a9aed6a47efd9601, type: 3}
   m_Name: Stage 6
   m_EditorClassIdentifier: Assembly-CSharp::_02._Script.Stage.StageDataSo
-  StageName: "\uB610 \uB2E4\uB978 \uBB3C\uB9AC \uBC95\uCE59"
-  StageDescription: "\uC0C1\uC2DD\uC774 \uD1B5\uD558\uC9C0 \uC54A\uC744 \uC218\uB3C4
-    \uC788\uC2B5\uB2C8\uB2E4. \uC0DD\uAC01\uC744 \uD558\uC9C0 \uC54A\uB294 \uAC83\uC774
-    \uC88B\uACA0\uC2B5\uB2C8\uB2E4. \uC7A0\uAE50, \uB2F9\uC2E0\uC774 \uC0DD\uAC01\uC744
-    \uD560 \uC218 \uC788\uB358\uAC00\uC694?"
-  StagePrefab: {fileID: 2665892603102748438, guid: 461e4a8683fea82449060075582d3b18, type: 3}
+  <StageName>k__BackingField: "\uBCF5\uD569 \uC9C0\uD615"
+  <StageDescription>k__BackingField: "\uB808\uC774\uC800\uB294 \uB545\uB3C4 \uD65C\uC131\uD654
+    \uC2DC\uD0AC \uC218 \uC788\uC2B5\uB2C8\uB2E4. \uB545\uC740 \uD65C\uC131\uD654\uB418\uBA74
+    \uD2B9\uC815 \uBC29\uD5A5\uC73C\uB85C \uC774\uB3D9\uD569\uB2C8\uB2E4. \uB2E4\uC2DC
+    \uD65C\uC131\uD654\uD558\uBA74 \uB418\uB3CC\uC544\uAC11\uB2C8\uB2E4."
+  <StageSceneName>k__BackingField: Stage6

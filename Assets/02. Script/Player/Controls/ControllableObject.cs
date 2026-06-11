@@ -27,6 +27,7 @@ namespace _02._Script.Player.Controls
 			input.OnLookAction += Sight.LookHandle;
 			input.OnCatchAction += Interactor.InteractHandle;
 			input.OnDropAction += Catch.OnDrop;
+			input.OnRotateAction += Catch.OnRotate;
 
 			Interactor.OnInteractAction += Catch.OnInteract;
 		}
@@ -38,6 +39,7 @@ namespace _02._Script.Player.Controls
 			input.OnLookAction -= Sight.LookHandle;
 			input.OnCatchAction -= Interactor.InteractHandle;
 			input.OnDropAction -= Catch.OnDrop;
+			input.OnRotateAction -= Catch.OnRotate;
 			
 			Interactor.OnInteractAction -= Catch.OnInteract;
 			Movement.StopMovement();

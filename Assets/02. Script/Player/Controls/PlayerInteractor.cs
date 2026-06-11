@@ -17,9 +17,8 @@ namespace _02._Script.Player.Controls
 			if (camOrigin == null) Debug.Log($"NULL {this.name}");
 			Vector3 dir = camOrigin.rotation * Vector3.forward;
 			Debug.DrawRay(camOrigin.position, dir * dist, Color.red, 2f);
-			RaycastHit hit;
-			Physics.Raycast(camOrigin.position, dir, out hit, dist, objectLayer);
-			if (hit.transform && hit.transform.TryGetComponent<IInteractable>(out IInteractable obj))
+			Physics.Raycast(camOrigin.position, dir, out var hit, dist, objectLayer);
+			if (hit.transform && hit.transform.TryGetComponent(out IInteractable obj))
 			{
 				obj?.Interact(this);
 				OnInteractAction?.Invoke(obj);

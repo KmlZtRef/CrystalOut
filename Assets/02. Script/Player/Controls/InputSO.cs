@@ -13,6 +13,7 @@ namespace _02._Script.Player.Controls
 		public event Action OnSwitchPlayerAction;
 		public event Action OnCatchAction;
 		public event Action OnDropAction;
+		public event Action<float> OnRotateAction;
         
 		private InputSystem_Actions _input;
 	
@@ -63,6 +64,13 @@ namespace _02._Script.Player.Controls
 		{
 			if (context.performed)
 				OnDropAction?.Invoke();
+		}
+
+		public void OnRotate(InputAction.CallbackContext context)
+		{
+			Vector2 value =  context.ReadValue<Vector2>();
+			float scrollDelta = value.y;
+			OnRotateAction?.Invoke(scrollDelta);
 		}
 	}
 }
