@@ -1,11 +1,13 @@
 ﻿using System;
+using UnityEngine;
 
 namespace _02._Script.Options
 {
 	[Serializable]
 	public struct OptionNameId
 	{
-		public string Id;
-		public string Name;
+		[field: SerializeField] public string Id { get; private set; }
+		[field: SerializeField] public string Name { get; private set; }
+		[field: SerializeField] public bool DontLoadScene { get; private set; }
 	}
 }

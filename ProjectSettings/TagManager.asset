@@ -41,6 +41,15 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: ParticleLower
+    uniqueID: 3298330435
+    locked: 0
+  - name: ParticleMiddle
+    uniqueID: 1415108111
+    locked: 0
+  - name: ParticleUpper
+    uniqueID: 3490894701
+    locked: 0
   m_RenderingLayers:
   - Default
   - Light Layer 1

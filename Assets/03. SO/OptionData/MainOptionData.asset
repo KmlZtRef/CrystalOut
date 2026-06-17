@@ -16,5 +16,9 @@ MonoBehaviour:
   parentName: 
   loadSceneOnClick: 0
   datas:
-  - Id: Play
-    Name: "\uD50C\uB808\uC774"
+  - <Id>k__BackingField: Play
+    <Name>k__BackingField: "\uD50C\uB808\uC774"
+    <DontLoadScene>k__BackingField: 0
+  - <Id>k__BackingField: Setting
+    <Name>k__BackingField: "\uC124\uC815"
+    <DontLoadScene>k__BackingField: 0

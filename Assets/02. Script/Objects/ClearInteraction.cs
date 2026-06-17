@@ -39,7 +39,7 @@ namespace _02._Script.Objects
 
 		private void ClearStage()
 		{
-			anim.ActivateAnimation();
+			anim.Activate();
 			clearCam.Priority = 5;
 		}
 

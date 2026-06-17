@@ -16,7 +16,6 @@ MonoBehaviour:
   parentName: Main
   loadSceneOnClick: 1
   datas:
-  - Id: StageSelect
-    Name: "\uC2A4\uD14C\uC774\uC9C0 \uBAA8\uB4DC"
-  - Id: FreeWorld
-    Name: "\uC790\uC720 \uBAA8\uB4DC"
+  - <Id>k__BackingField: StageSelect
+    <Name>k__BackingField: "\uC2A4\uD14C\uC774\uC9C0 \uBAA8\uB4DC"
+    <DontLoadScene>k__BackingField: 0

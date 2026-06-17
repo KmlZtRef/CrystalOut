@@ -75,10 +75,9 @@ namespace _02._Script.Player.Controls
 			PrecheckStyleCatch();
 		}
 
-		#region Catch Methods
 		private void PrecheckStyleCatch()
 		{
-			// 충돌 감지 떡칠 너무 싫지만 어쩔수 었음
+			// 충돌 감지 떡칠 너무 싫지만 어쩔수 없음
 			
 			Vector3 dir = camOrigin.rotation * Vector3.forward;
 
@@ -109,6 +108,7 @@ namespace _02._Script.Player.Controls
 				if (rayCast)
 				{
 					// Failure
+					Debug.Log("Wall Pierced.");
 					SetDroppable(false);
 					return;
 				}
@@ -128,6 +128,7 @@ namespace _02._Script.Player.Controls
 			if (count > 0)
 			{
 				// Failure
+				Debug.Log("Not Enough Space.");
 				SetDroppable(false);
 				return;
 			}
@@ -137,8 +138,7 @@ namespace _02._Script.Player.Controls
 			
 			SetDroppable(true);
 		}
-		#endregion
-
+		
 		private void SetDroppable(bool droppable)
 		{
 			_droppable.Value = droppable;

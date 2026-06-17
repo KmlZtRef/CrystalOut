@@ -3,6 +3,7 @@ using UnityEngine;
 
 namespace _02._Script.Objects
 {
+	[RequireComponent(typeof(Rigidbody))]
 	public class MovingGround : TriggerableMono
 	{
 		[SerializeField] private Vector3 startPosition;

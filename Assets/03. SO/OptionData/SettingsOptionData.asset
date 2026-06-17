@@ -14,12 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::_02._Script.Options.OptionData
   optionName: Settings
   parentName: Main
+  loadSceneOnClick: 0
   datas:
-  - Id: GraphicSetting
-    Name: "\uADF8\uB798\uD53D \uC124\uC815"
-  - Id: SoundSetting
-    Name: "\uC18C\uB9AC \uC124\uC815"
-  - Id: ControlSetting
-    Name: "\uC870\uC791 \uC124\uC815"
-  - Id: Quit
-    Name: "\uC885\uB8CC"
+  - <Id>k__BackingField: 
+    <Name>k__BackingField: Test1
+    <DontLoadScene>k__BackingField: 1

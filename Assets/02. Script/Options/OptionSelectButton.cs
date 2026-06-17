@@ -7,9 +7,10 @@ namespace _02._Script.Options
 {
 	public class OptionSelectButton : MonoBehaviour
 	{
-		public event Action<string> OnClick;
-		public string id;
-		public string displayName;
+		public event Action<string, bool> OnClick;
+		public string Id { get; private set; }
+		public string DisplayName { get; private set; }
+		public bool DontLoadScene { get; private set; }
 
 		protected Button Btn;
 		protected Text Text;
@@ -20,10 +21,11 @@ namespace _02._Script.Options
 			Text = GetComponentInChildren<Text>();
 		}
 
-		public void Initialize(string id, string displayName)
+		public void Initialize(string id, string displayName, bool dontLoadScene = false)
 		{
-			this.id = id;
-			this.displayName = displayName;
+			this.Id = id;
+			this.DisplayName = displayName;
+			this.DontLoadScene = dontLoadScene;
 		
 			Btn.onClick.AddListener(HandleButtonClick);
 			Text.text = displayName;
@@ -31,7 +33,7 @@ namespace _02._Script.Options
 
 		protected virtual void HandleButtonClick()
 		{
-			OnClick?.Invoke(id);
+			OnClick?.Invoke(Id, DontLoadScene);
 		}
 	}
 }

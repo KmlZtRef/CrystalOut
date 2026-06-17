@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using UnityEngine;
 
 namespace _02._Script.Objects
@@ -7,34 +8,31 @@ namespace _02._Script.Objects
     {
         [SerializeField] private ParticleSystem chargeParticle;
         [SerializeField] private ParticleSystem particle;
-        [SerializeField] private Animator animator;
-
-        private int _animActiveHash;
         
         public event Action OnAnimationEnd;
 
         private void Awake()
         {
             particle ??= GetComponent<ParticleSystem>();
-            animator ??= GetComponent<Animator>();
-            _animActiveHash = Animator.StringToHash("Activate");
         }
 
-        public void ActivateAnimation()
+        public void Activate()
         {
-            animator.SetTrigger(_animActiveHash);
+            StartCoroutine(ActivateCoroutine());
         }
 
-        public void ChargeAnimation()
+        private IEnumerator ActivateCoroutine()
         {
             chargeParticle.Play();
+            yield return new WaitForSeconds(0.1f);
+            particle.Stop();
+            yield return new WaitForSeconds(3f);
+            AnimationEnded();
         }
 
         public void AnimationEnded()
         {
             OnAnimationEnd?.Invoke();
-            chargeParticle.Stop();
-            particle.Play();
         }
     }
 }

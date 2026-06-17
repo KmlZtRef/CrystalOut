@@ -52,7 +52,7 @@ namespace _02._Script.Player
 
 		public void UnloadPlayer()
 		{
-			Player.DisableControl();
+			Player?.DisableControl();
 			if (Player != null)
 				Destroy(Player.gameObject);
 			Player = null;
