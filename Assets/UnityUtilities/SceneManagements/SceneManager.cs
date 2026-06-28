@@ -1,10 +1,12 @@
 using System;
 using System.Threading.Tasks;
+using _02._Script.EventParams;
+using GameManagements;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnitySceneManager = UnityEngine.SceneManagement.SceneManager;
 
-namespace UnityUtility.SceneManagements
+namespace UnityUtilities.SceneManagements
 {
     public class SceneManager : MonoBehaviour
     {
@@ -72,7 +74,7 @@ namespace UnityUtility.SceneManagements
 
         private void OnSceneChangedHandle(Scene scene, LoadSceneMode mode)
         {
-            
+            MessageBus.Publish(new OnSceneChanged());
         }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using System;
 using _02._Script.Logics;
 using _02._Script.Player.Controls;
+using _02._Script.Sounds;
 using Unity.Cinemachine;
 using UnityEngine;
 
@@ -9,6 +10,7 @@ namespace _02._Script.Objects
 	public class ClearInteraction : MonoBehaviour, IInteractable
 	{
 		[SerializeField] private ClearAreaAnimation anim;
+		[SerializeField] private ClearAreaSound sound;
 		[SerializeField] private CinemachineCamera clearCam;
 		
 		public event Action OnInteracted;
@@ -40,6 +42,7 @@ namespace _02._Script.Objects
 		private void ClearStage()
 		{
 			anim.Activate();
+			sound.PlaySound();
 			clearCam.Priority = 5;
 		}
 

@@ -1,5 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
+using _02._Script.EventParams;
+using GameManagements;
 using UnityEngine;
 
 namespace _02._Script.Options
@@ -19,7 +21,8 @@ namespace _02._Script.Options
             {
                 var container = Instantiate(containerPrf, contents);
                 container.Initialize(option);
-                container.OnSelect += OpenContainer;
+                container.OnOpenContainer += ChangeCategory;
+                container.OnOpenPanel += OpenPanel;
                 if (isFirst) container.Open();
                 else container.Close();
             
@@ -27,15 +30,27 @@ namespace _02._Script.Options
             
                 _containers.Add(container);
             }
+            
+            MessageBus.Subscribe<RequestChangeCategory>(ChangeCategory);
         }
 
-        private void OpenContainer(string optionName)
+        private void ChangeCategory(RequestChangeCategory param)
+        {
+            ChangeCategory(param.CategoryName);
+        }
+
+        private void ChangeCategory(string optionName)
         {
             var container = _containers.FirstOrDefault(c => c.ContainerName == optionName);
             if (container != null)
                 container.Open();
             else
                 Debug.LogWarning("Container not found");
+        }
+
+        private void OpenPanel(string panelName)
+        {
+            MessageBus.Publish(new RequestSetPanelActive() { PanelName = panelName, Active = true});
         }
     }
 }

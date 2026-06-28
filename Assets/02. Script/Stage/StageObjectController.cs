@@ -1,31 +1,38 @@
-using System;
+using _02._Script.Datas;
 using _02._Script.Objects;
 using UnityEngine;
 
-public class StageObjectController : MonoBehaviour
+namespace _02._Script.Stage
 {
-    [SerializeField] private Transform clearAreaLocation;
-    [SerializeField] private GameObject clearAreaPrefab;
-    [SerializeField] private ClearInteraction clearArea;
-    
-    public ClearInteraction ClearArea => clearArea;
-
-    public void Init()
+    public class StageObjectController : MonoBehaviour
     {
-        clearArea = Instantiate(
+        [SerializeField] private Transform clearAreaLocation;
+        [SerializeField] private GameObject clearAreaPrefab;
+        [SerializeField] private ClearInteraction clearArea;
+        [SerializeField] private ObjectController objectController;
+    
+        public ClearInteraction ClearArea => clearArea;
+
+        public void Init()
+        {
+            clearArea = Instantiate(
                     clearAreaPrefab,
                     clearAreaLocation.position, 
                     clearAreaLocation.rotation, 
                     clearAreaLocation)
                 .GetComponent<ClearInteraction>();
-    }
 
-    private void OnDrawGizmosSelected()
-    {
-        if (!clearAreaLocation) return;
-        Vector3 size = new Vector3(3, 5, 3);
-        Vector3 loc = clearAreaLocation.position + new Vector3(0, size.y / 2f, 0);
-        Gizmos.color = Color.blueViolet;
-        Gizmos.DrawWireCube(loc, size);
+            var context = DataCenter.GetContext();
+            objectController.ResetAllObjects(context);
+        }
+
+        private void OnDrawGizmosSelected()
+        {
+            if (!clearAreaLocation) return;
+            Vector3 size = new Vector3(3, 5, 3);
+            Vector3 loc = clearAreaLocation.position + new Vector3(0, size.y / 2f, 0);
+            Gizmos.color = Color.blueViolet;
+            Gizmos.DrawWireCube(loc, size);
+        }
     }
 }

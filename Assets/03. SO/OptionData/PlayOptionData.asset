@@ -14,8 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::_02._Script.Options.OptionData
   optionName: Play
   parentName: Main
-  loadSceneOnClick: 1
   datas:
   - <Id>k__BackingField: StageSelect
     <Name>k__BackingField: "\uC2A4\uD14C\uC774\uC9C0 \uBAA8\uB4DC"
-    <DontLoadScene>k__BackingField: 0
+    <OnClickAction>k__BackingField: 1

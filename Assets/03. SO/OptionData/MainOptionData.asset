@@ -14,11 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::_02._Script.Options.OptionData
   optionName: Main
   parentName: 
-  loadSceneOnClick: 0
   datas:
   - <Id>k__BackingField: Play
     <Name>k__BackingField: "\uD50C\uB808\uC774"
-    <DontLoadScene>k__BackingField: 0
+    <OnClickAction>k__BackingField: 0
   - <Id>k__BackingField: Setting
     <Name>k__BackingField: "\uC124\uC815"
-    <DontLoadScene>k__BackingField: 0
+    <OnClickAction>k__BackingField: 2

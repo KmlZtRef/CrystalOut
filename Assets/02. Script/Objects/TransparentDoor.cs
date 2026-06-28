@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections;
+using _02._Script.Datas;
 using Unity.Cinemachine;
 using UnityEngine;
 
@@ -12,6 +13,8 @@ namespace _02._Script.Objects
 		[SerializeField] private CinemachineCamera cinemachineCamera;
 		
 		private Collider _collider;
+
+		private bool _useCam;
 		
 		private void Start()
 		{
@@ -36,7 +39,7 @@ namespace _02._Script.Objects
 
 		private IEnumerator OpenDoorCoroutine()
 		{
-			cinemachineCamera.Priority = 3;
+			if (_useCam) cinemachineCamera.Priority = 3;
 			yield return new WaitForSeconds(0.3f);
 			particle.gameObject.SetActive(true);
 			particle.Play();
@@ -44,12 +47,17 @@ namespace _02._Script.Objects
 			doorVisual.SetActive(false);
 			_collider.enabled = false;
 			yield return new WaitForSeconds(3.0f);
-			cinemachineCamera.Priority = 0;
+			if (_useCam) cinemachineCamera.Priority = 0;
 		}
 
 		public override void Trigger()
 		{
 			OpenDoor();
+		}
+
+		public override void InjectData(SettingDataContext context)
+		{
+			_useCam = context.moveCamOnObjectActive;
 		}
 	}
 }

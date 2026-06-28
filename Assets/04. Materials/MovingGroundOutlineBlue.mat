@@ -51,7 +51,8 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _Dist: 0.5
+    - _Cut: 0.05
+    - _Dist: 0.3
     - _MaxAlpha: 1
     - _Power: 1000
     - _QueueControl: 0

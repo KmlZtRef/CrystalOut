@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections;
+using _02._Script.EventParams;
 using _02._Script.Logics.MessageParameters;
 using GameManagements;
 using UnityEngine;
+using UnityUtilities.SceneManagements;
 using UnityUtility.SceneManagements;
 
 namespace _02._Script.Stage
@@ -22,11 +24,12 @@ namespace _02._Script.Stage
 			stageData = data;
 			MessageBus.Subscribe<OnTransitionEnded>(GenerateStage);
 			MessageBus.Publish(new OnStartLoadScene() {SceneName = _gameSceneName});
+			MessageBus.Publish(new RequestLoadPlayer());
 		}
 
 		private void HandleClearInteracted()
 		{
-			MessageBus.Publish(new OnClearAreaInteracted());
+			MessageBus.Publish(new RequestUnloadPlayer());
 		}
 
 		private void ClearStage(OnTransitionEnded _)
@@ -43,21 +46,27 @@ namespace _02._Script.Stage
 				MessageBus.Unsubscribe<OnTransitionEnded>(GenerateStage);
 
 				if (!stageData) return;
-				// Legacy : Prefab loading style
-				// _loadedStage = Instantiate(stageData.StagePrefab, Vector3.zero, Quaternion.identity).GetComponent<StageObjectController>();
 
-				// New : Scene loading style
 				await SceneManager.Instance.AddSceneAsync(stageData.StageSceneName);
+				
 				_loadedStage = FindFirstObjectByType<StageObjectController>();
-				_loadedStage.Init();
-				_loadedStage.ClearArea.OnInteracted += HandleClearInteracted;
-				_loadedStage.ClearArea.OnAnimEnd += HandleClearAnimEnd;
-
+				
+				if (_loadedStage == null)
+				{
+					Debug.LogWarning("[StageManager] Can't find StageObjectController component");
+				}
+				else
+				{
+					_loadedStage.Init();
+					_loadedStage.ClearArea.OnInteracted += HandleClearInteracted;
+					_loadedStage.ClearArea.OnAnimEnd += QuitStage;
+				}
+				
 				CursorControl.Instance.HideCursor();
 			}
 			catch (Exception e)
 			{
-				Debug.LogError("[StageManager] " + e.Message);
+				Debug.LogError($"[StageManager] {e.Message} ||| {e.StackTrace}");
 			}
 			finally
 			{
@@ -65,7 +74,13 @@ namespace _02._Script.Stage
 			}
 		}
 
-		private void HandleClearAnimEnd()
+		private void QuitStage(RequestQuitStage param)
+		{
+			Debug.Log("[StageManager] QuitStage");
+			QuitStage();
+		}
+
+		private void QuitStage()
 		{
 			MessageBus.Subscribe<OnTransitionEnded>(ClearStage); 
 			MessageBus.Publish(new OnStartLoadScene() {SceneName = _mainMenuSceneName});
@@ -90,11 +105,18 @@ namespace _02._Script.Stage
 			_mainMenuSceneName = data.MainMenuSceneName;
 			
 			MessageBus.Subscribe<OnStageSelect>(HandleOnLoadStage);
+			MessageBus.Subscribe<OnRestartStage>(HandleRestartStage);
+			MessageBus.Subscribe<RequestQuitStage>(QuitStage);
 		}
 
 		private void HandleOnLoadStage(OnStageSelect param)
 		{
 			LoadStage(param.StageData);
+		}
+
+		private void HandleRestartStage(OnRestartStage param)
+		{
+			LoadStage(stageData);
 		}
 	}
 }

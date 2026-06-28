@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using _02._Script.EventParams;
+using GameManagements;
+using UnityEngine;
 
 namespace _02._Script.Player.Controls
 {
@@ -20,7 +22,7 @@ namespace _02._Script.Player.Controls
 			Catch = GetComponent<ICatchHandler>();
 		}
 
-		public virtual void BindEvents(InputSO input)
+		public virtual void BindEvents(InputSo input)
 		{
 			input.OnMoveAction += Movement.MoveHandle;
 			input.OnJumpAction += Movement.JumpHandle;
@@ -29,10 +31,12 @@ namespace _02._Script.Player.Controls
 			input.OnDropAction += Catch.OnDrop;
 			input.OnRotateAction += Catch.OnRotate;
 
+			input.OnPauseAction += HandlePauseGame;
+
 			Interactor.OnInteractAction += Catch.OnInteract;
 		}
 
-		public virtual void UnbindEvents(InputSO input)
+		public virtual void UnbindEvents(InputSo input)
 		{
 			input.OnMoveAction -= Movement.MoveHandle;
 			input.OnJumpAction -= Movement.JumpHandle;
@@ -41,8 +45,15 @@ namespace _02._Script.Player.Controls
 			input.OnDropAction -= Catch.OnDrop;
 			input.OnRotateAction -= Catch.OnRotate;
 			
+			input.OnPauseAction -= HandlePauseGame;
+			
 			Interactor.OnInteractAction -= Catch.OnInteract;
 			Movement.StopMovement();
+		}
+
+		private void HandlePauseGame()
+		{
+			MessageBus.Publish(new OnGamePaused());
 		}
 	}
 }

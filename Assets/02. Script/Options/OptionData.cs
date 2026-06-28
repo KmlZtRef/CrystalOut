@@ -7,7 +7,6 @@ namespace _02._Script.Options
 	{
 		public string optionName;
 		public string parentName;
-		public bool loadSceneOnClick;
 		public OptionNameId[] datas;
 	}
 }

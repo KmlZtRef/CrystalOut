@@ -5,7 +5,7 @@ using UnityEngine.InputSystem;
 namespace _02._Script.Player.Controls
 {
 	[CreateAssetMenu(fileName = "InputSO", menuName = "Scriptable Objects/InputSO")]
-	public class InputSO : ScriptableObject, InputSystem_Actions.IPlayerActions
+	public class InputSo : ScriptableObject, InputSystem_Actions.IPlayerActions
 	{
 		public event Action<Vector2> OnMoveAction;
 		public event Action<Vector2> OnLookAction;
@@ -14,6 +14,7 @@ namespace _02._Script.Player.Controls
 		public event Action OnCatchAction;
 		public event Action OnDropAction;
 		public event Action<float> OnRotateAction;
+		public event Action OnPauseAction;
         
 		private InputSystem_Actions _input;
 	
@@ -71,6 +72,12 @@ namespace _02._Script.Player.Controls
 			Vector2 value =  context.ReadValue<Vector2>();
 			float scrollDelta = value.y;
 			OnRotateAction?.Invoke(scrollDelta);
+		}
+
+		public void OnPause(InputAction.CallbackContext context)
+		{
+			if (context.performed)
+				OnPauseAction?.Invoke();
 		}
 	}
 }

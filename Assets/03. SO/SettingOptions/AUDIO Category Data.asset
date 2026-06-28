@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: df3d0003f53741c99b86ad4e8ddf3dc1, type: 3}
+  m_Name: AUDIO Category Data
+  m_EditorClassIdentifier: Assembly-CSharp::_02._Script.Settings.SettingOptionCategoryData
+  <SettingCategoryName>k__BackingField: "\uC624\uB514\uC624"
+  <Options>k__BackingField:
+  - {fileID: 11400000, guid: cb44e3665c1fba144853cede4ae67425, type: 2}
+  - {fileID: 11400000, guid: e86755ece1373634b953b16b68e9b315, type: 2}
+  - {fileID: 11400000, guid: 42835eef0a9493145b0dc37f3a56bf32, type: 2}
+  - {fileID: 11400000, guid: 56ef8aeb8152e1b4da430e16ca834857, type: 2}
+  <CategoryIcon>k__BackingField: {fileID: -2099693724, guid: 68a2ed9c0b91e5f48bd8211f8208104d, type: 3}

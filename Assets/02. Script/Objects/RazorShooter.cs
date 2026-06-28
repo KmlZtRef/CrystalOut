@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using _02._Script.Datas;
 using _02._Script.Objects;
 using _02._Script.Player.Controls;
 using UnityEngine;
@@ -88,5 +89,10 @@ public class RazorShooter : TriggerableMono, IInteractable
     public override void Trigger()
     {
         Shoot();
+    }
+
+    public override void InjectData(SettingDataContext context)
+    {
+        // Nothing
     }
 }

@@ -2,7 +2,7 @@ using System;
 using DG.Tweening;
 using UnityEngine;
 using UnityEngine.UI;
-using SceneManager = UnityUtility.SceneManagements.SceneManager;
+using SceneManager = UnityUtilities.SceneManagements.SceneManager;
 using Text = TMPro.TextMeshProUGUI;
 
 namespace _02._Script.Options
@@ -13,11 +13,11 @@ namespace _02._Script.Options
         [SerializeField] private OptionSelectButton buttonPrf;
         [SerializeField] private Button backButton; 
         [SerializeField] private Text titleText;
-        [SerializeField] private bool loadSceneOnClick = false;
         [SerializeField] private string containerName;
         [SerializeField] private string parentName;
         [SerializeField] private float closedXPos = 720;
-        public event Action<string> OnSelect;
+        public event Action<string> OnOpenContainer;
+        public event Action<string> OnOpenPanel;
     
         private RectTransform _rectTransform;
     
@@ -32,11 +32,10 @@ namespace _02._Script.Options
         {
             this.containerName = optionData.optionName;
             this.parentName = optionData.parentName;
-            this.loadSceneOnClick = optionData.loadSceneOnClick;
             foreach (OptionNameId d in optionData.datas)
             {
                 var btn = Instantiate(buttonPrf, contents);
-                btn.Initialize(d.Id, d.Name, d.DontLoadScene);
+                btn.Initialize(d.Id, d.Name, d.OnClickAction);
                 btn.OnClick += SelectOption;
             }
 
@@ -57,22 +56,37 @@ namespace _02._Script.Options
             _rectTransform.DOKill();
         }
 
-        private void SelectOption(string option, bool dontLoadScene)
+        private async void SelectOption(string option, OptionNameId.OnClickActionEnum action)
         {
-            Close();
-            if (loadSceneOnClick && !dontLoadScene)
+            try
             {
-                SceneManager.Instance.LoadSceneAsync(option);
+                Close();
+
+                switch (action)
+                {
+                    case OptionNameId.OnClickActionEnum.ToOtherCategory:
+                        OnOpenContainer?.Invoke(option);
+                        break;
+                    case OptionNameId.OnClickActionEnum.LoadScene:
+                        await SceneManager.Instance.LoadSceneAsync(option);
+                        break;
+                    case OptionNameId.OnClickActionEnum.OpenPanel:
+                        OnOpenPanel?.Invoke(option);
+                        break;
+                    default:
+                        Debug.LogWarning("Unexpected Enum");
+                        break;
+                }
             }
-            else
+            catch (Exception e)
             {
-                OnSelect?.Invoke(option);
+                Debug.LogError($"[OptionContainer] Exception : {e.Message}");
             }
         }
 
         private void GoBack()
         {
-            SelectOption(parentName, true);
+            SelectOption(parentName, OptionNameId.OnClickActionEnum.ToOtherCategory);
         }
 
         public void Close()

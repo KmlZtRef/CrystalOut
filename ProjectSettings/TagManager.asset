@@ -50,6 +50,9 @@ TagManager:
   - name: ParticleUpper
     uniqueID: 3490894701
     locked: 0
+  - name: WorldUI
+    uniqueID: 1774756263
+    locked: 0
   m_RenderingLayers:
   - Default
   - Light Layer 1

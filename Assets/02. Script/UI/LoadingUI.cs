@@ -1,37 +1,39 @@
-using System;
 using UnityEngine;
 using UnityUtilities;
 
-[RequireComponent(typeof(Animator))]
-public class LoadingUI : UnbreakingSingleton<LoadingUI>
+namespace _02._Script.UI
 {
-    private Animator _anim;
-    private int _paramHash;
-    private bool _loading = false;
+    [RequireComponent(typeof(Animator))]
+    public class LoadingUI : UnbreakingSingleton<LoadingUI>
+    {
+        private Animator _anim;
+        private int _paramHash;
+        private bool _loading = false;
     
-    public bool IsLoading => _loading;
+        public bool IsLoading => _loading;
     
-    private void Start()
-    {
-        DontDestroyOnLoad(gameObject);
-        _anim = GetComponent<Animator>();
-        _paramHash = Animator.StringToHash("Open");
-    }
+        private void Start()
+        {
+            DontDestroyOnLoad(gameObject);
+            _anim = GetComponent<Animator>();
+            _paramHash = Animator.StringToHash("Open");
+        }
 
-    public void Open()
-    {
-        _anim.SetBool(_paramHash, true);
-        _loading = true;
-    }
+        public void Open()
+        {
+            _anim.SetBool(_paramHash, true);
+            _loading = true;
+        }
 
-    public void Close()
-    {
-        _anim.SetBool(_paramHash, false);
-        _loading = true;
-    }
+        public void Close()
+        {
+            _anim.SetBool(_paramHash, false);
+            _loading = true;
+        }
 
-    public void AnimationEnd()
-    {
-        _loading = false;
+        public void AnimationEnd()
+        {
+            _loading = false;
+        }
     }
 }

@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using UnityEngine;
+using UnityUtilities.SceneManagements;
 using UnityUtility.SceneManagements;
 
 namespace GameManagements

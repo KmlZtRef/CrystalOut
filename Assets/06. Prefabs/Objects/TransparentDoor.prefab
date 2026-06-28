@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4610421628337805962}
   - component: {fileID: 5273875681017480995}
-  m_Layer: 9
+  m_Layer: 7
   m_Name: DoorFocusCamera
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -86,7 +86,7 @@ GameObject:
   - component: {fileID: 5054949099131586037}
   - component: {fileID: 1348221281797119948}
   - component: {fileID: 2611596910406138898}
-  m_Layer: 9
+  m_Layer: 7
   m_Name: Particle System
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4922,7 +4922,7 @@ GameObject:
   - component: {fileID: 1809848269033427536}
   - component: {fileID: 8111476515269693421}
   - component: {fileID: 3077617062887894236}
-  m_Layer: 9
+  m_Layer: 7
   m_Name: TransparentDoor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4994,7 +4994,7 @@ GameObject:
   - component: {fileID: 6500230360641975326}
   - component: {fileID: 2801203925207902695}
   - component: {fileID: 1737839970616159719}
-  m_Layer: 9
+  m_Layer: 7
   m_Name: Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}

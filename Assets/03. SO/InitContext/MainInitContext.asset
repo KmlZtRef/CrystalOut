@@ -16,3 +16,5 @@ MonoBehaviour:
   <PlayerSceneName>k__BackingField: Player
   <GameSceneName>k__BackingField: IngameEnvironments
   <MainMenuSceneName>k__BackingField: MainMenu
+  <UILists>k__BackingField: {fileID: 11400000, guid: b09e76bcc8886a9458a9e8bdabf90f68, type: 2}
+  <AudioMixer>k__BackingField: {fileID: 24100000, guid: 25ecf7b8708c0b443be32956e1e06307, type: 2}

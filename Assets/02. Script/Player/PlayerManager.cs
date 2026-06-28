@@ -1,8 +1,11 @@
 ﻿using System;
+using _02._Script.Datas;
+using _02._Script.EventParams;
 using _02._Script.Logics.MessageParameters;
 using _02._Script.Player.Controls;
 using GameManagements;
 using UnityEngine;
+using UnityUtilities.SceneManagements;
 using UnityUtility.SceneManagements;
 
 namespace _02._Script.Player
@@ -17,11 +20,11 @@ namespace _02._Script.Player
 		{
 			_playerSceneName = data.PlayerSceneName;
 			
-			MessageBus.Subscribe<OnStageSelect>(HandleStageSelect);
-			MessageBus.Subscribe<OnClearAreaInteracted>(HandleStageInteracted);
+			MessageBus.Subscribe<RequestLoadPlayer>(HandleStageSelect);
+			MessageBus.Subscribe<RequestUnloadPlayer>(HandleStageInteracted);
 		}
 
-		private void HandleStageSelect(OnStageSelect _)
+		private void HandleStageSelect(RequestLoadPlayer _)
 		{
 			MessageBus.Subscribe<OnTransitionEnded>(HandleTransitionEnded);
 		}
@@ -32,7 +35,7 @@ namespace _02._Script.Player
 			LoadPlayer();
 		}
 
-		private void HandleStageInteracted(OnClearAreaInteracted _)
+		private void HandleStageInteracted(RequestUnloadPlayer _)
 		{
 			UnloadPlayer();
 		}
@@ -43,6 +46,9 @@ namespace _02._Script.Player
 			{
 				await SceneManager.Instance.AddSceneAsync(_playerSceneName);
 				Player = FindFirstObjectByType<PlayerControl>();
+
+				var context = DataCenter.GetContext();
+				Player.ApplySettings(context);
 			}
 			catch (Exception e)
 			{

@@ -18,6 +18,11 @@ namespace _02._Script.Player.Controls
 			_eulerAngle = newAngle;
 		}
 
+		public void SetSensitivity(float sensitivity)
+		{
+			sensitive = sensitivity;
+		}
+
 		private void FixedUpdate()
 		{
 			target.rotation = Quaternion.Euler(_eulerAngle);

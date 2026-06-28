@@ -1,4 +1,5 @@
 ﻿using System;
+using _02._Script.Datas;
 using _02._Script.EventParams;
 using GameManagements;
 using UnityEngine;
@@ -7,7 +8,7 @@ namespace _02._Script.Player.Controls
 {
 	public class PlayerControl : ControllableObject
 	{
-		[SerializeField] private InputSO input;
+		[SerializeField] private InputSo input;
 		[SerializeField] private OuterFluidCam outerCam;
 
 		private ObjectCatchHandler _catch;
@@ -23,7 +24,7 @@ namespace _02._Script.Player.Controls
 			}
 		}
 
-		private void SwitchControl() // 나중에 FSM으로 변경 예정
+		private void SwitchControl()
 		{
 			if (_outerFluid)
 			{
@@ -54,6 +55,13 @@ namespace _02._Script.Player.Controls
 			input.OnSwitchPlayerAction -= SwitchControl;
 			
 			gameObject.SetActive(false);
+		}
+
+		public void ApplySettings(SettingDataContext context)
+		{
+			float sensitivity = context.sensitivity;
+			Sight.SetSensitivity(sensitivity);
+			outerCam.Sight.SetSensitivity(sensitivity);
 		}
 	}
 }
